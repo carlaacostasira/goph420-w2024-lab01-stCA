@@ -32,6 +32,7 @@ last_index = np.max(np.where(velocity > threshold_value)) #Obtaining the index w
 
 T = time[last_index] # Getting the corresponding time value T within the criterion
 velocity_2 = velocity[:last_index +  1] # Creating a new veloccity array from the index 0 to last index +1
+velocity_2 = np.square(velocity_2)
 
 time_2_list = [] # Creating a list that will store the values for the time
 for i in range(len(time)):

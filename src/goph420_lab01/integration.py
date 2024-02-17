@@ -19,25 +19,62 @@ def integrate_newton(x, f, alg):
     Raises
     ------
     ValueError
-        If alg contain a str different than 'trap' or 'simp'
         If the dimensions of x and f are imcompatible
+        If alg contain a str different than 'trap' or 'simp'
     """
 
-x = 
-
 if not (isinstance(x, (list, np.ndarray)) and isinstance(f, (list, np.ndarray))):
-        raise ValueError("x and f must be array-like")
-    if np.shape(x) != np.shape(f):
-        raise ValueError("x and f must have the same shape")
+    raise ValueError("x and f must be array-like")
+if np.shape(x) != np.shape(f):
+    raise ValueError("x and f must have the same shape")
 
 if alg not in ['trap', 'simp']:
-        raise ValueError(f"Invalid algorithm '{alg}'. Allowed values are 'trap' or 'simp'")
-    
-#Implement the trapezoid rule
+    raise ValueError(f"Invalid '{alg}'. Allowed values are 'trap' or 'simp'")
+
+Delta_t = (x[-1] - x[0])/N 
+
+# Calculating the trapezoid rule
 if alg == 'trap':
-    integral = np.trapz(f, x)
-# Implement Simpson's rule
+    integral =  0.5 * Delta_t * (f[0] +  2 * sum(f[1:N-1]) + f[N-1])
+    
+# Calculating the Simpson's rule
 elif alg == 'simp':
-    integral = np.sum(f) * np.diff(x)[0] /  3  # Simplified version, actual Simpson's rule requires more work
+    integral =  
+    
+    return integral
+
+
+def integrate_gauss(f, lims, npts=3):
+    # Check if f is callable
+    if not callable(f):
+        raise TypeError("f must be a callable object")
+    
+    # Check if lims has length  2
+    if not isinstance(lims, (list, tuple)) or len(lims) !=  2:
+        raise ValueError("lims must be an iterable with  2 elements")
+    
+    # Check if lims[0] and lims[1] can be converted to float
+    try:
+        a = float(lims[0])
+        b = float(lims[1])
+    except (ValueError, TypeError):
+        raise ValueError("lims must contain two numbers that can be converted to float")
+    
+    # Check if npts is in the allowed set
+    if npts not in [1,  2,  3,  4,  5]:
+        raise ValueError("npts must be one of [1,  2,  3,  4,  5]")
+    
+    # Use numpy's linspace to generate the points
+    x = np.linspace(a, b, npts)
+    
+    # Apply the Gaussian quadrature method
+    # This is a simplified example and does not include the actual Gauss-Legendre points
+    # For a real implementation, you would need to use the actual Gauss-Legendre points
+    integral =  0.0
+    for i in range(npts):
+        integral += f(x[i])
+    
+    # Multiply by the interval width divided by the number of points
+    integral *= (b - a) / npts
     
     return integral
