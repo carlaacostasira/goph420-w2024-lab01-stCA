@@ -28,15 +28,26 @@ velocity = data[:,1] # Second column of data (velocity)
 
 max_abs_velocity = np.max(np.abs(velocity)) # Calculating the Max Absolute value of the velocity
 threshold_value =  0.005 * max_abs_velocity #Calculation the max velocity greater than 0.5%
-last_index = np.max(np.where(velocity > threshold_value)) # Find the last index where velocity is greater than 0.5%
+last_index = np.max(np.where(velocity > threshold_value))
 
-T = time[last_index] 
+# Get the corresponding time value
+T = time[last_index]
+velocity_2 = np.array()
+velocity_2 = velocity[:last_index +  1]
 
-T_index = np.where(time == T)[0][0]
+time_2_list = [] 
 
-# Create new arrays for time and velocity up to T
-time_up_to_T = time[:T_index+1]
-velocity_up_to_T = velocity[:T_index+1]
+# Iterate over the time array
+for i in range(len(time)):
+    # If the current time value is less than or equal to T, append it to the list
+    if time[i] <= T:
+        time_2_list.append(time[i])
+    # Otherwise, break the loop because we've reached the end of the desired range
+    else:
+        break
+
+# Convert the list to a NumPy array
+time_2 = np.array(time_2_list)
 
 #plt.plot(time, velocity)
 #plt.xlabel('Time (s)')
@@ -44,5 +55,4 @@ velocity_up_to_T = velocity[:T_index+1]
 #plt.title('Raw Data Plot')
 #plt.show()
 
-print (time_up_to_T)
-print (velocity_up_to_T)
+print (time_2)
