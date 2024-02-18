@@ -23,23 +23,23 @@ def integrate_newton(x, f, alg):
         If alg contain a str different than 'trap' or 'simp'
     """
 
-if not (isinstance(x, (list, np.ndarray)) and isinstance(f, (list, np.ndarray))):
+if not (isinstance(x, (list, np.ndarray)) and isinstance(f, (list, np.ndarray))): # Comparing if x and f are array-like w/ same shape
     raise ValueError("x and f must be array-like")
 if np.shape(x) != np.shape(f):
     raise ValueError("x and f must have the same shape")
 
-if alg not in ['trap', 'simp']:
+if alg not in ['trap', 'simp']: #Evaluating f the imput is trap or simp, otherwise will come up an error 
     raise ValueError(f"Invalid '{alg}'. Allowed values are 'trap' or 'simp'")
 
-Delta_t = (x[-1] - x[0])/N 
+N = 
 
-# Calculating the trapezoid rule
+# Calculating the integration with trapezoid rule
 if alg == 'trap':
     integral =  0.5 * Delta_t * (f[0] +  2 * sum(f[1:N-1]) + f[N-1])
     
-# Calculating the Simpson's rule
-elif alg == 'simp':
-    integral =  
+# Calculating the integration with Simpson's rule
+elif alg == 'simp': #How can I set up a condition that 
+    integral =  Delta_t/3 * (f[0] + 4 * sum(f[1:]  )
     
     return integral
 
