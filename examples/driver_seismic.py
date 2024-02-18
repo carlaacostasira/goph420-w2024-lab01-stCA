@@ -32,7 +32,7 @@ last_index = np.max(np.where(velocity > threshold_value)) #Obtaining the index w
 
 T = time[last_index] # Getting the corresponding time value T within the criterion
 velocity_2 = velocity[:last_index +  1] # Creating a new veloccity array from the index 0 to last index +1
-velocity_2 = np.square(velocity_2)
+velocity_2 = np.square(velocity_2) # Calculatin
 
 time_2_list = [] # Creating a list that will store the values for the time
 for i in range(len(time)):
@@ -42,6 +42,18 @@ for i in range(len(time)):
         break
 
 time_2 = np.array(time_2_list) # Converting the list to a NumPy array as time_2
+
+intervals = np.array([1, 2, 10, 15, 30, 50, 100]) #Defining the different intervals
+
+Delta_t = np.zeros (len(intervals), dtype=float) # Creating an empty array to store the delta t
+I_TrapRule = np.zeros(len(intervals), dtype=float) # Creating an empty array to store the integration values for Trap Rule
+I_SimpRule = np.zeros(len(intervals), dtype=float) # Creating an empty array to store the integration values for Simp Rule
+eps_a_trap = np.zeros(len(intervals)-1, dtype=float) # Creating an empty array to store the approx relative error for Trap Rule
+eps_a_simp = np.zeros(len(intervals)-1, dtype=float) # Creating an empty array to store the approx relative error for Simp Rule
+
+for i in range(len(intervals)):
+
+
 
 plt.plot(time_2, velocity_2)
 plt.xlabel('Time (s)')
