@@ -31,17 +31,18 @@ if np.shape(x) != np.shape(f):
 if alg not in ['trap', 'simp']: #Evaluating f the imput is trap or simp, otherwise will come up an error 
     raise ValueError(f"Invalid '{alg}'. Allowed values are 'trap' or 'simp'")
 
-N = 
-
 # Calculating the integration with trapezoid rule
 if alg == 'trap':
     integral =  0.5 * Delta_t * (f[0] +  2 * sum(f[1:N-1]) + f[N-1])
     
 # Calculating the integration with Simpson's rule
 elif alg == 'simp': #How can I set up a condition that 
+    if N 
     integral =  Delta_t/3 * (f[0] + 4 * sum(f[1:]  )
     
     return integral
+
+
 
 
 def integrate_gauss(f, lims, npts=3):
