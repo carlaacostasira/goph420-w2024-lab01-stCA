@@ -33,7 +33,7 @@ if alg not in ['trap', 'simp']: #Evaluating f the imput is trap or simp, otherwi
 
 # Calculating the integration with trapezoid rule
 if alg == 'trap':
-    integral =  0.5 * Delta_t * (f[0] +  2 * sum(f[1:N-1]) + f[N-1])
+    integral =  0.5 * ( x[-1] - x[0] ) * (f[0] +  2 * sum(f[1:N-1]) + f[N-1])
     
 # Calculating the integration with Simpson's rule
 elif alg == 'simp': #How can I set up a condition that 
