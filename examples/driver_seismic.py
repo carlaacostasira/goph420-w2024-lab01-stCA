@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import goph420_lab01
 from goph420_lab01 import integration as itg
 
 """Loading the data from the s_wave_data.txt
@@ -22,7 +23,6 @@ from goph420_lab01 import integration as itg
     """
 
 data = np.loadtxt(r"C:/Users/carla/Repos/goph420-w2024-lab01-stCA/examples/s_wave_data.txt") #Loading Data from .txt
-
 
 time = data[:,0] # First column of data (time)
 velocity = data[:,1] # Second column of data (velocity)

@@ -38,8 +38,8 @@ if alg not in ['trap', 'simp']: #Evaluating f the imput is trap or simp, otherwi
 if alg == 'trap':
     integral =  0.5 * (x[-1] - x[0]) * (f[0] +  2 * sum(f[1:N-1]) + f[-1])
     
-# Calculating the integration with Simpson's rule
-#elif alg == 'simp': #How can I set up a condition that count the # of segments or points
+#Calculating the integration with Simpson's rule
+elif alg == 'simp': #How can I set up a condition that count the # of segments or points
 #    for i in a range(1:N)
 #        if i % 2 == 0:
 #            integral =  (x[-1] - x[0])/3 * (f[0] + 4 * sum(f[1:2*i-1] + 2 * f[2:2*i] + f[-1]))
