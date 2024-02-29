@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import goph420_lab01
-from goph420_lab01 import integration as itg
+import sys 
+sys.path.append('/Users/carla/Repos/goph420-w2024-lab01-stCA/src')
+from goph420_lab01 import integration
+from goph420_lab01.integration import integrate_newton
 
 """Loading the data from the s_wave_data.txt
 
@@ -44,7 +46,7 @@ for i in range(len(time)):
 
 time_2 = np.array(time_2_list) # Converting the list to a NumPy array as time_2
 
-step_size = np.array([1, 2, 4, 8, 30, 50, 100]) #Defining the different intervals that will be performed
+step_size = np.array([1, 2, 4, 8, 15, 30, 53, 100]) #Defining the different intervals that will be performed
 
 Delta_t = np.zeros (len(step_size)) # Creating an empty array to store the delta t
 I_TrapRule = np.zeros(len(step_size)) # Creating an empty array to store the integration values for Trap Rule
@@ -58,7 +60,7 @@ for i in range(len(step_size)):
     Velocity = velocity_square[0:-1:step_size[i]] # Getting velocity square values for the integrations
 
     I_TrapRule[i] = integration.integrate_newton(Time, Velocity, 'trap')
-#    I_SimpRule[i] = integration.integrate_newton(Time, Velocity, 'simp')
+    I_SimpRule[i] = integration.integrate_newton(Time, Velocity, 'simp')
     break
 
 plt.plot(time_2, velocity_2)
