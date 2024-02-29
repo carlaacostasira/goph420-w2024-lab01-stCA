@@ -24,13 +24,13 @@ def integrate_newton(x, f, alg):
 #         If alg contain a str different than 'trap' or 'simp'
 #     """
 
-# if not (isinstance(x, (list, np.ndarray)) and isinstance(f, (list, np.ndarray))): # Comparing if x and f are array-like w/ same shape
-#     raise ValueError("x and f must be array-like")
-# if np.shape(x) != np.shape(f):
-#     raise ValueError("x and f must have the same shape")
+    if not (isinstance(x, np.ndarray) and isinstance(f, np.ndarray)): # Comparing if x and f are array-like w/ same shape
+        raise ValueError("x and f must be array-like")
+    if np.shape(x) != np.shape(f):
+        raise ValueError("x and f must have the same shape")
 
-# if alg not in ['trap', 'simp']: #Evaluating f the imput is trap or simp, otherwise will come up an error 
-#     raise ValueError(f"Invalid '{alg}'. Allowed values are 'trap' or 'simp'")
+    if alg not in ['trap', 'simp']: #Evaluating f the imput is trap or simp, otherwise will come up an error 
+        raise ValueError(f"Invalid '{alg}'. Allowed values are 'trap' or 'simp'")
 
     a = x[0]
     b = x[-1]
@@ -42,16 +42,14 @@ def integrate_newton(x, f, alg):
     if alg == 'trap':
         integral =  ((b-a)/(2*N)) * (fo +  2 * sum(f[1:-1]) + fn)
 
-    return float(integral)
-    
-#Calculating the integration with Simpson's rule
- elif alg == 'simp': 
-    if len(x) % 2 == 0: #If there are even number of points
-             integral =  (x[-4] - x[0])/(3*(N-3)) * (f[0] + 4 * sum(f[1:-4:2] + 2 * f[2:-4:2] + f[-4])) + ((x[-1] - x[-4])/8) * (f[-4] + 3 * f[-3] + 3 * f[-2] + f[-1]) #Perform Simp 1/3 + 3/8 for the last 4 points 
-         else: 
-             integral = (x[-4] - x[0])/(3*(N-3)) * (f[0] + 4 * sum(f[1:-4:2] + 2 * f[2:-4:2] + f[-4])) #Perform Simp 1/3  FIX
-#     return integral
+    #Calculating the integration with Simpson's rule
+    elif alg == 'simp': 
+        if N % 2 == 1: #If there are odd number of segments
+            integral =  (x[-4] - x[0])/(3*(N-2)) * (f[0] + 4 * sum(f[1:-4:2] + 2 * f[2:-4:2] + f[-4])) + ((x[-1] - x[-4])/8) * (f[-4] + 3 * f[-3] + 3 * f[-2] + f[-1]) #Perform Simp 1/3 + 3/8 for the last 4 points 
+        else: 
+            integral = (x[-1] - x[0])/(3*(N)) * (f[0] + 4 * sum(f[1:-4:2] + 2 * f[2:-4:2] + f[-1])) #Perform Simp 1/3  
 
+    return float(integral)
 
 # def integrate_gauss(f, lims, npts=3):
 #     # Check if f is callable
