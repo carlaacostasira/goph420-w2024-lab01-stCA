@@ -33,6 +33,10 @@ last_index = np.max(np.where(velocity > threshold_value)) #Obtaining the index w
 T = time[last_index] # Getting the corresponding time value T within the criterion
 velocity_2 = velocity[:last_index + 1] # Creating a new veloccity array from the index 0 to last index +1
 velocity_square = np.square(velocity_2) # Calculating velocity square
+#velocity_square2 = velocity_2**2
+
+# print(velocity_square)
+# print (velocity_square2)
 
 time_2_list = [] # Creating a list that will store the values for the time until T
 for i in range(len(time)):
@@ -52,6 +56,7 @@ plt.legend(loc="upper right")
 plt.show()
 
 print(velocity_2[646])
+print(time_2[646])
 
 step_size = np.array([1, 2, 4, 8, 17, 30, 53, 100]) #Defining the different intervals that will be performed
 
@@ -64,11 +69,12 @@ expected_I = (1/T)*((((velocity_2[646])**3)/3-((velocity_2[0])**3)/3)) #Value 1.
 
 for i in range(len(step_size)):
     Time = time_2[0:-1:step_size[i]] # Getting time values for the integrations. From 0 to T (criterion) w/ step sizes given by the intervals array 
-    Velocity = velocity_2[0:-1:step_size[i]] # Getting velocity square values for the integrations
+    Velocity = velocity_square[0:-1:step_size[i]] # Getting velocity square values for the integrations
 
-    I_trap[i] = integrate_newton(Time, Velocity, 'trap')
-    eps_a_trap[i] = I_trap[i] - I_trap[i-1] / I_trap[i]
-    I_simp[i] = integrate_newton(Time, Velocity, 'simp')
-    eps_a_simp[i] = I_simp[i] - I_simp[i-1] / I_simp[i]
+    I_trap[i] = (integrate_newton(Time, Velocity, 'trap'))/T
+    eps_a_trap[i] = I_trap[i+1] - I_trap[i] / I_trap[i+1]
+    I_simp[i] = integrate_newton(Time, Velocity, 'simp')/T
+    eps_a_simp[i] = I_simp[i+1] - I_simp[i] / I_simp[i+1]
     
-    break
+print(I_trap)
+print(I_simp)
