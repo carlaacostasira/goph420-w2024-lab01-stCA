@@ -63,30 +63,3 @@ def integrate_newton(x, f, alg):
                                             + f[-1]) #Perform Simp 1/3  
 
     return float(integral)
-
-#def integrate_gauss(f, lims, npts=3):
-#     # Check if f is callable
-#     if not callable(f):
-#         raise TypeError("f must be a callable object")
-    
-#     # Check if lims has length  2
-#     if not isinstance(lims, (list, tuple)) or len(lims) !=  2:
-#         raise ValueError("lims must be an iterable with  2 elements")
-    
-#     # Check if lims[0] and lims[1] can be converted to float
-#     try:
-#         a = float(lims[0])
-#         b = float(lims[1])
-#     except (ValueError, TypeError):
-#         raise ValueError("lims must contain two numbers that can be converted to float")
-    
-#     # Check if npts is in the allowed set
-#     if npts not in [1,  2,  3,  4,  5]:
-#         raise ValueError("npts must be one of [1,  2,  3,  4,  5]")
-    
-#     # Use numpy's linspace to generate the points
-#     x = np.linspace(a, b, npts)
-    
-#     # Apply the Gaussian quadrature method
-#     # This is a simplified example and does not include the actual Gauss-Legendre points
-#     # For a real implementation, you would need to use the actual Gauss-Legendre points
