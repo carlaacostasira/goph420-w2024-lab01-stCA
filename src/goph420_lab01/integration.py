@@ -32,14 +32,12 @@ def integrate_newton(x, f, alg):
     if alg not in ['trap', 'simp']: #Evaluating f the imput is trap or simp, otherwise will come up an error 
         raise ValueError(f"Invalid '{alg}'. Allowed values are 'trap' or 'simp'")
 
-    fo = f[0]
-    fn = f[-1]
     N = len(x) - 1
     dx = x[1] - x[0]
 
 # Calculating the integration with trapezoid rule
     if alg == 'trap':
-        integral = (0.5*dx) * (fo +  2 * np.sum(f[1:-1]) + fn)
+        integral = (0.5*dx) * (f[0] +  2 * np.sum(f[1:-1]) + f[-1])
 
     #Calculating the integration with Simpson's rule
     elif alg == 'simp': 
