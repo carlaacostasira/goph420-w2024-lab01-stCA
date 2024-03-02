@@ -57,10 +57,15 @@ plt.show()
 
 step_size = np.array([1, 2, 4, 8, 17, 31, 53, 101]) #Defining the different intervals that will be performed
 delta_t = np.empty(len(step_size))
-for i in range(len(step_size))
-delta_t = [len(time_2[::step]) for step in step_size]
 
-print (num_points)
+for i in range(len(step_size)):
+    # Correctly calculate the differences with the step size
+    differences = time_2[step_size[i]::step_size[i]] - time_2[:-step_size[i]:step_size[i]]
+    # Store the difference for the first element of the differences array
+    # If there are no differences (i.e., the step size is too large), store 0
+    delta_t[i] = differences[0] if differences.size > 0 else 0
+
+print(delta_t)
 
 I_trap = np.empty(len(step_size)) # Creating an empty array to store the integration values for Trap Rule
 I_simp = np.empty(len(step_size)) # Creating an empty array to store the integration values for Simp Rule
@@ -77,22 +82,22 @@ for i in range(len(step_size)):
     I_simp[i] = (integrate_newton(Time, Velocity, 'simp'))/T
     
 for i in range(len(step_size - 1)):    
-    eps_a_trap[i] = abs(I_trap[i] - I_trap[i-1] / I_trap[i])
-    eps_a_simp[i] = abs(I_simp[i] - I_simp[i-1] / I_simp[i])
+    eps_a_trap[i] = np.abs(I_trap[i] - I_trap[i-1] / I_trap[i])
+    eps_a_simp[i] = np.abs(I_simp[i] - I_simp[i-1] / I_simp[i])
     
 
-plt.plot(num_points, eps_a_trap, label="\u03B5 for trap", marker='o')
-plt.plot(num_points, eps_a_simp, label="\u03B5 for simp",  marker='o')
+plt.plot(delta_t, eps_a_trap, label=" trap", marker='o')
+plt.plot(delta_t, eps_a_simp, label="\u03B5 for simp",  marker='o')
 plt.xscale("log")
 plt.yscale("log")
-plt.xlabel('Number of points, N')
-plt.ylabel('Relative Error, \u03B5')
-plt.title('Relative error vs Number of intervals')
-plt.legend(loc="upper right")
+plt.xlabel('Sampling interval $\Delta$t (s)')
+plt.ylabel('Approx. Relative Error, \u03B5')
+plt.title('Relative error vs Sampling Interval')
+plt.legend(loc="upper left")
 plt.show()
 
 print(I_trap)
 print(I_simp)
-
+print(expected_I)
 # print(eps_a_trap)
 # print(eps_a_simp)

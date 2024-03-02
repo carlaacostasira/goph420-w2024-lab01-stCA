@@ -32,8 +32,6 @@ def integrate_newton(x, f, alg):
     if alg not in ['trap', 'simp']: #Evaluating f the imput is trap or simp, otherwise will come up an error 
         raise ValueError(f"Invalid '{alg}'. Allowed values are 'trap' or 'simp'")
 
-    a = x[0]
-    b = x[-1]
     fo = f[0]
     fn = f[-1]
     N = len(x) - 1
