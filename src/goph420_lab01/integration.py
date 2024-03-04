@@ -116,10 +116,3 @@ def integrate_gauss(f, lims, *, npts=3):
     # Return the result 
     return float(integral)
 
-# Main function
-if __name__ == "__main__":
-    x = np.array([0, 1, 2, 3, 4])
-    f = np.array([0, 1, 2, 3, 4])
-    print(integrate_newton(x, f, 'trap'))
-    print(integrate_newton(x, f, 'simp'))
-    print(integrate_gauss(lambda x: x**2, [0, 1], npts=3))
