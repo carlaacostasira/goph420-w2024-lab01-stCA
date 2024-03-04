@@ -82,7 +82,8 @@ def integrate_gauss(f, lims, *, npts=3):
 #     ------
 #     ValueError
 #         If f is not callable
-#         If alg contain a str different than 'trap' or 'simp'
+#         
+#
 #     """
 
     # Check if f is callable
@@ -104,15 +105,14 @@ def integrate_gauss(f, lims, *, npts=3):
     if npts not in [1, 2, 3, 4, 5]:
         raise ValueError("npts must be one of [1, 2, 3, 4, 5]")
     
-    a = lims[0]
-    b = lims[1]
+    a = np.min(lims)
+    b = np.max(lims)
         
-    points, weights = np.polynomial.legendre.leggauss(npts) #Where I should add here the lims? 
-    points_t = 0.5*points*(b+a)*(b-a)
+    points, weights = np.polynomial.legendre.leggauss(npts) 
+    points_t = 0.5*(points*(b-a) + (b+a))
     weights_t = 0.5*weights*(b-a)
     
     integral = sum(weights_t * f(points_t))
          
-    # Return the result 
     return float(integral)
 
