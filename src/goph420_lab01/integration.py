@@ -68,9 +68,9 @@ def integrate_gauss(f, lims, *, npts=3):
 
 #     Inputs
 #     ------
-#     f : 
-#     lims : 
-#     npts : 
+#     f : function
+#     lims : lower and upper bound of integration
+#     npts : values
 #         Default value of 'trap' or 'simp' 
         
 #     Returns
@@ -81,7 +81,7 @@ def integrate_gauss(f, lims, *, npts=3):
 #     Raises
 #     ------
 #     ValueError
-#         If the dimensions of x and f are imcompatible
+#         If f is not callable
 #         If alg contain a str different than 'trap' or 'simp'
 #     """
 
@@ -104,7 +104,9 @@ def integrate_gauss(f, lims, *, npts=3):
     if npts not in [1, 2, 3, 4, 5]:
         raise ValueError("npts must be one of [1, 2, 3, 4, 5]")
     
-    integral = ...
+    nodes, weights = np.polynomial.legendre.leggauss(npts) #Where I should add here the lims? 
+
+    integral = sum(weights * f(nodes))
     
     # Return the result 
     return float(integral)
