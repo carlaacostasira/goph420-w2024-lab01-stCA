@@ -49,12 +49,12 @@ plt.xlabel('Time (s)')
 plt.ylabel('Velocity (mm/s)')
 plt.title('Raw Data Plot')
 plt.legend(loc="upper right")
-#plt.show()
+plt.show()
 
-step_size = np.array([1, 2, 4, 8, 15, 30, 60, 101]) #Defining the different intervals that will be performed
+step_size = np.array([1, 2, 4, 8, 15, 30, 101]) #Defining the different intervals that will be performed
 delta_t = np.empty(len(step_size))
 
-num_points = [len(time_2[::step]) for step in step_size]
+#num_points = [len(time_2[::step]) for step in step_size]
 
 for i in range(len(step_size)):
     # Correctly calculate the differences with the step size
@@ -84,7 +84,7 @@ for i in range(len(step_size - 1)):
 
 error_t = np.empty(len(step_size)) #Calculating the order of the truncation error
 for i in range(len(step_size - 1)):
-    error_t[i] = (1/12)*delta_t[i]**3
+    error_t[i] = delta_t[i]**3
 
 plt.plot(delta_t, eps_a_trap, label="trap |\u03B5_a|", marker='o')
 plt.plot(delta_t, eps_a_simp, label="simp |\u03B5_a|",  marker='o')
