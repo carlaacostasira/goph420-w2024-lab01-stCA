@@ -104,9 +104,22 @@ def integrate_gauss(f, lims, *, npts=3):
     if npts not in [1, 2, 3, 4, 5]:
         raise ValueError("npts must be one of [1, 2, 3, 4, 5]")
     
-    nodes, weights = np.polynomial.legendre.leggauss(npts) #Where I should add here the lims? 
-
-    integral = sum(weights * f(nodes))
+    a = lims[0]
+    b = lims[1]
+        
+    points, weights = np.polynomial.legendre.leggauss(npts) #Where I should add here the lims? 
+    points_t = 0.5*points*(b+a)*(b-a)
+    weights_t = 0.5*weights*(b-a)
     
+    integral = sum(weights_t * f(points_t))
+         
     # Return the result 
     return float(integral)
+
+# Main function
+if __name__ == "__main__":
+    x = np.array([0, 1, 2, 3, 4])
+    f = np.array([0, 1, 2, 3, 4])
+    print(integrate_newton(x, f, 'trap'))
+    print(integrate_newton(x, f, 'simp'))
+    print(integrate_gauss(lambda x: x**2, [0, 1], npts=3))
