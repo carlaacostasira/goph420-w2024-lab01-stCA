@@ -61,7 +61,7 @@ def integrate_newton(x, f, alg):
     return float(integral)
 
 
-def integrate_gauss(f, lims, *, npts=3):
+def integrate_gauss(f, lims, npts=3):
 #"""
 # Compute numerical integration of discrete
 #    data using Gauss Legendre.
