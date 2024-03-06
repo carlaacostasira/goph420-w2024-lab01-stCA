@@ -15,7 +15,7 @@ class TestIntegrateGaussPoly_1stOrder(unittest.TestCase):
         
     def test_integral_value_npts2(self):
         actual = integrate_gauss(self.f,self.x, npts=2)
-        self.assertAlmostEqual(actual, self.expected) #continue
+        self.assertAlmostEqual(actual, self.expected)
         
     def test_integral_value_npts3(self):
         actual = integrate_gauss(self.f,self.x, npts=3)
@@ -197,37 +197,27 @@ class TestIntegrateGaussPoly_9thOrder(unittest.TestCase):
         actual = integrate_gauss(self.f,self.x, npts=5)
         self.assertAlmostEqual(actual, self.expected)
 
-# class TestIntegrateGaussNonPoly(unittest.TestCase):
-#     def test_function(self):
-#         # Define a non-polynomial function
-#         def f(x):
-#             return np.cos(x) + x
-
-#         # Calculate exact integral
-#         exact_integral = 2 * np.pi**2 / 2
-
-#         # Test with npts=1 to 5
-#         for npts in range(1, 6):
-#             # Use integrate_gauss with npts
-#             result = integrate_gauss(f, [0, 2*np.pi], npts=npts)
-#             self.assertAlmostEqual(result, exact_integral)
-            
-# class TestFixedQuad(unittest.TestCase):
-#     def test_fixed_quad(self):
-#         # Define a test function
-#         def f(x):
-#             return np.sin(x)
-
-#         # Test with npts=1 to 5
-#         for npts in range(1, 6):
-#         # Use integrate_gauss with npts
-#             gauss_result = integrate_gauss(f, [0, 2*np.pi], npts=npts)
-
-#         # Use scipy.integrate.fixed_quad with the same number of points
-#             fixed_quad_result, _ = fixed_quad(f, 0, 2*np.pi, n=npts)
-
-#         # Compare the results
-#             self.assertAlmostEqual(gauss_result, fixed_quad_result)
+class TestFixedQuadNonPoly(unittest.TestCase):
+    def test_FixedQuad_npts1(self):
+        self.x = [0, (np.pi)]
+        self.f = lambda x: np.cos(x) + np.sin(x)
+        npts_values = [1,2,3,4,5]
+        
+        for npts in npts_values:
+            gauss_result = integrate_gauss(self.f, self.x, npts=npts)
+            fixed_quad_result, _ = fixed_quad(self.f, 0, np.pi, n=npts)
+            self.assertAlmostEqual(gauss_result, fixed_quad_result)
+        
+class TestFixedQuadPoly(unittest.TestCase):
+    def setUp(self):
+        self.x = [0, 3]
+        self.f = lambda x: x**2 + x**3 + 1
+        npts_values = [1,2,3,4,5]
+        
+        for npts in npts_values:
+            gauss_result = integrate_gauss(self.f, self.x, npts=npts)
+            fixed_quad_result, _ = fixed_quad(self.f, 0, 3, n=npts)
+            self.assertAlmostEqual(gauss_result, fixed_quad_result)        
         
 if __name__ == '__main__':
     unittest.main()
