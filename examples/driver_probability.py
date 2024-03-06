@@ -6,16 +6,14 @@ from goph420_lab01.integration import integrate_gauss
 # Define the mean and standard deviation
 mean_i = 1.5 # Mean of the distribution
 sd_i = 0.5 # Standard deviation of the distribution
-magnitude = 4.0
-#z = (magnitude - mean_i)/sd_i
-x = np.linspace(mean_i - sd_i, mean_i + sd_i, 100)
+magnitude = 2.0
+z = (magnitude - mean_i)/sd_i
 
 lims = [0, 4]
 # Calculate the PDF for the standard normal distribution at each x value
 def probability_function(x):
-    return norm.pdf(x, mean_i, sd_i)
-
-#((1/(np.sqrt(2*np.pi))) * np.exp( -0.5 * (value1*value2)**2))
+    probability_function = ((1/(np.sqrt(2*np.pi))) * np.exp( -0.5 * (z)**2))
+    return probability_function
 
 probability_event = np.empty(5)
 eps_a = np.empty(4) 

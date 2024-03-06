@@ -29,6 +29,8 @@ def integrate_newton(x, f, alg):
     if np.shape(x) != np.shape(f):
         raise ValueError("x and f must have the same shape")
 
+    alg = alg.strip().lower() # Ensure alg is stripped of whitespace and converted to lowercase
+
     if alg not in ['trap', 'simp']: #Evaluating f the imput is trap or simp, otherwise will come up an error 
         raise ValueError(f"Invalid '{alg}'. Allowed values are 'trap' or 'simp'")
 
@@ -81,9 +83,10 @@ def integrate_gauss(f, lims, npts=3):
 #     Raises
 #     ------
 #     ValueError
-#         If f is not callable
-#         
-#
+#         If f is not a callable function
+#         If lims doesn't have two elements, that correspond to the limits of the integration and 
+#         can be converted in float
+#         If npts is not 1, 2, 3, 4, or 5. 
 #     """
 
     # Check if f is callable
