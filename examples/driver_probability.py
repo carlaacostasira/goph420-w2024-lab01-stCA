@@ -11,7 +11,7 @@ z = (magnitude - mean_i)/sd_i
 
 lims = [0, 5]
 
-# Calculate the PDF for the standard normal distribution at each x value
+# Calculate the PDF for the standard normal distribution at each z value
 def probability_function(z):
     function = ((1/(np.sqrt(2*np.pi))) * np.exp( -0.5 * (z)**2))
     return function
@@ -25,8 +25,8 @@ for i, npts in enumerate(npts_values):
     integral = integrate_gauss(probability_function, lims, npts=npts)
     probability_event[i] = 0.5 - integral
 
-for i in range(1, 4): # Adjusted to start from 1 to match the length of probability_event
-    eps_a[i-1] = np.abs(probability_event[i] - probability_event[i-1] / probability_event[i])
+for i in range(1, 5): # Adjusted to start from 1 to match the length of probability_event
+    eps_a[i-1] = (probability_event[i] - probability_event[i-1]) / probability_event[i]
 
 print(probability_event)
 print(eps_a)

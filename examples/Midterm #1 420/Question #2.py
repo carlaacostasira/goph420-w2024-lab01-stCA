@@ -39,4 +39,4 @@ def velocity_function(t):
 
 Integration_5 = integrate_gauss(velocity_function, lims, 5)
 
-print(f"The integral using the Gausss Quadrature {Integration_5}") 
+print(f"The integral using the Gausss Quadrature {Integration_5, 8}") 
