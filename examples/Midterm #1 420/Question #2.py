@@ -32,7 +32,7 @@ print(f"The integral value using the Simpson's 1/3 rule with \u0394t = 1s is {ro
 print(f"The integral using the Simpson's 1/3 rule with \u0394t = 2s is {round(Integration_4, 8)}")
 
 #Part c) Defening the function to calculate the integrate gauss 
-lims = [0, 21]
+lims = [0, 20]
 def velocity_function(t):
     function = v_f + (v_o - v_f) * np.exp(-(c/m)*t)
     return function

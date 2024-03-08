@@ -114,6 +114,9 @@ def integrate_gauss(f, lims, npts=3):
     points_t = (0.5 * points * (b - a)) + (0.5 * (b + a))
     weights_t = 0.5*weights*(b-a)
     
+    print(points_t)
+    print(weights_t)
+    
     integral = sum(weights_t * f(points_t))
          
     return float(integral)
