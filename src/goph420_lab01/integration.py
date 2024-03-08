@@ -41,25 +41,24 @@ def integrate_newton(x, f, alg):
     if alg == 'trap':
         integral = (0.5*dx) * (f[0] +  2 * np.sum(f[1:-1]) + f[-1])
 
+        
     #Calculating the integration with Simpson's rule
     elif alg == 'simp': 
+        
         if N % 2: #If there are odd number of segments
             integral =  ((dx)/(3)) * (f[0] 
                                     + 4 * np.sum(f[1:-4:2]) 
                                     + 2 * np.sum(f[2:-4:2]) 
                                     + f[-4]) # Perform Simp 1/3 
             
-            integral += ((3*dx)*0.125) * (f[-4] 
+            integral += ((3*dx)/(8)) * (f[-4] 
                                      + 3 * f[-3] 
                                      + 3 * f[-2] 
                                      + f[-1]) # Perform Simp 3/8 for the last 4 points
-                       
+            
         else: 
-            integral = (dx)/(3) * (f[0] 
-                                            + 4 * np.sum(f[1:-1:2]) 
-                                            + 2 * np.sum(f[2:-1:2]) 
-                                            + f[-1]) #Perform Simp 1/3  
-
+            integral = (dx)/(3) * (f[0] + 4 * np.sum(f[1:-1:2]) + 2 * np.sum(f[2:-1:2]) + f[-1]) #Perform Simp 1/3  
+            
     return float(integral)
 
 
@@ -112,7 +111,7 @@ def integrate_gauss(f, lims, npts=3):
     b = np.max(lims)
         
     points, weights = np.polynomial.legendre.leggauss(npts) 
-    points_t = 0.5*(points*(b-a) + (b+a))
+    points_t = (0.5 * points * (b - a)) + (0.5 * (b + a))
     weights_t = 0.5*weights*(b-a)
     
     integral = sum(weights_t * f(points_t))

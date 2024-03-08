@@ -6,17 +6,18 @@ from goph420_lab01.integration import integrate_gauss
 # Define the mean and standard deviation
 mean_i = 1.5 # Mean of the distribution
 sd_i = 0.5 # Standard deviation of the distribution
-magnitude = 2.0
+magnitude = 4.0
 z = (magnitude - mean_i)/sd_i
 
-lims = [0, 4]
+lims = [0, 5]
+
 # Calculate the PDF for the standard normal distribution at each x value
-def probability_function(x):
-    probability_function = ((1/(np.sqrt(2*np.pi))) * np.exp( -0.5 * (z)**2))
-    return probability_function
+def probability_function(z):
+    function = ((1/(np.sqrt(2*np.pi))) * np.exp( -0.5 * (z)**2))
+    return function
 
 probability_event = np.empty(5)
-eps_a = np.empty(4) 
+eps_a = np.empty(5) 
 
 npts_values = [1, 2, 3, 4, 5] # Adjusted to match the length of eps_a
 
@@ -30,22 +31,22 @@ for i in range(1, 4): # Adjusted to start from 1 to match the length of probabil
 print(probability_event)
 print(eps_a)
 
-# plt.plot(npts_values, eps_a, label="|\u03B5_a|", marker='o')
-# plt.xscale("log")
-# plt.yscale("log")
-# plt.xlabel('Number of integration points')
-# plt.ylabel('Approx. Relative Error, |\u03B5|')
-# plt.title('Convergence plot')
-# plt.legend(loc="upper left")
-# plt.show()
+plt.plot(npts_values, eps_a, label="|\u03B5_a|", marker='o')
+plt.xscale("log")
+plt.yscale("log")
+plt.xlabel('Number of integration points')
+plt.ylabel('Approx. Relative Error, |\u03B5|')
+plt.title('Convergence plot')
+plt.legend(loc="upper left")
+plt.show()
 
 mean_ii = 10.28
 sd_ii = 0.05
 lims_ii = [10.25, 10.35] 
 
 def probability_function2(x):
-    return norm.pdf(x, mean_ii, sd_ii)
-
+    function = ((1/(np.sqrt(2*np.pi))) * np.exp( -0.5 * (z)**2))
+    return function
 
 true_value = np.empty(5)
 eps_aii = np.empty(4) 
